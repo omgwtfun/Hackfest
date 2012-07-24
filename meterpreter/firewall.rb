@@ -4,13 +4,13 @@
 #
 
 @client = client
-@port = '445'
-@enable
+@port = '445' #probably want to block this
 
 opts = Rex::Parser::Arguments.new(
 	"-h" => [ false, "Help Menu" ],
 	"-d" => [ false, "Disable TCP port" ],
 	"-e" => [ false, "Enable TCP port" ],
+	"-p" => [ false, "Port number" ],
 	"-f" => [ false, "Flush Firewall rules" ],
 	"-s" => [ false, "Display Firewall status"]
 )
@@ -18,9 +18,11 @@ opts = Rex::Parser::Arguments.new(
 opts.parse(args) { |opt, id, val|
 	case opt
 	when "-d"
-		@enable = false
+		firewall_disable_tcp_port(@port)	
 	when "-e"
-		@enable = true
+		firewall_enable_tcp_port(@port)	
+	when "-p"
+		@port = val
 	when "-f"
 		firewall_flush
 	when "-s"
@@ -59,7 +61,9 @@ end
 
 # Flush all firewall rules
 def firewall_flush()
-	cmd = "netsh a
+	
+	#cmd = "netsh advfirewall "
+end
 # Execute commands 
 def exec_cmd(command)
 	print_status("Executing #{command}")

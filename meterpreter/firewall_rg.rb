@@ -47,7 +47,8 @@ def usage
 end
 
 def enable(port)
-	@firewall.Add("Enabling port #{port}")
+	print_status("Enabling port #{port}")
+	@firewall.Add(Add, @port)
 end
 
 def disable(port)

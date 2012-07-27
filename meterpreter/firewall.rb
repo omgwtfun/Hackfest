@@ -37,6 +37,11 @@ opts.parse(args) { |opt, id, val|
 		raise Rex::Script::Completed
 	end
 }
+
+def usage
+	print_line "Cool story bro"
+end
+
 # Print inital firewall status
 def firewall_status() 
 	fw_status_cmd = "netsh firewall show config"
